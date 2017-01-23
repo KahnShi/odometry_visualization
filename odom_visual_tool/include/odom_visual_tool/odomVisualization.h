@@ -21,6 +21,7 @@ namespace odom_visualization
     int m_cnt_odom;
     int m_max_cnt_odom;
     int m_marker_id;
+    bool m_is_clear_old_visualization;
     visualization_msgs::MarkerArray m_markers;
     nav_msgs::Path m_visual_path;
 

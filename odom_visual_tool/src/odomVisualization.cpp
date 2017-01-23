@@ -8,7 +8,8 @@ namespace odom_visualization
     pnh.param("odom_sub_topic_name", m_odom_sub_topic_name, std::string("/truck/global/odom"));
     pnh.param("markers_pub_topic_name", m_markers_pub_topic_name, std::string("/truck/markers"));
     pnh.param("path_pub_topic_name", m_path_pub_topic_name, std::string("/truck/path"));
-    pnh.param("max_cnt_odom", m_max_cnt_odom, 400);
+    pnh.param("max_cnt_odom", m_max_cnt_odom, 1000);
+    pnh.param("clear_old_visualization", m_is_clear_old_visualization, true);
 
     m_cnt_odom = 0;
     m_marker_id = 0;
@@ -21,11 +22,14 @@ namespace odom_visualization
     {
       if (m_cnt_odom == 0)
         m_visual_path.header = odom_msg->header;
-      else if (m_cnt_odom >= m_max_cnt_odom){
+      else if (m_is_clear_old_visualization && m_cnt_odom >= m_max_cnt_odom){
         m_visual_path.poses.erase(m_visual_path.poses.begin());
         m_visual_path.header = m_visual_path.poses[0].header;
         m_markers.markers.erase(m_markers.markers.begin());
+        --m_cnt_odom;
+        // todo: remove previous marker, add delele mark to old ones.
       }
+      ++m_cnt_odom;
       geometry_msgs::PoseStamped cur_pose;
       cur_pose.header = odom_msg->header;
       cur_pose.pose = odom_msg->pose.pose;
@@ -57,9 +61,9 @@ namespace odom_visualization
       point_marker.pose.orientation.y = 0.0;
       point_marker.pose.orientation.z = 0.0;
       point_marker.pose.orientation.w = 1.0;
-      point_marker.scale.x = 0.2;
-      point_marker.scale.y = 0.2;
-      point_marker.scale.z = 0.2;
+      point_marker.scale.x = 0.1;
+      point_marker.scale.y = 0.1;
+      point_marker.scale.z = 0.1;
       point_marker.color.a = 1.0;
       point_marker.color.r = 1.0f;
       point_marker.color.g = 0.0f;
