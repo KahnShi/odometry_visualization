@@ -1,9 +1,12 @@
 <launch>
   <!-- you can load an exisiting tree with <node ... args="tree.bt"> !-->
+  <arg name="odom_topic_sub" default="/truck/global/odom" />
+  <arg name="markers_topic_pub" default="/truck/markers" />
+  <arg name="path_topic_pub" default="/truck/path" />
   <node pkg="odom_visual_tool" type="odom_visualization_node" name="odom_visualization" output="screen">
-    <param name="odom_sub_topic_name" type="string" value="/truck/global/odom" />
-    <param name="markers_pub_topic_name" value="/truck/markers" />
-    <param name="path_pub_topic_name" value="/truck/path" />
+    <param name="odom_sub_topic_name" type="string" value="$(arg odom_topic_sub)" />
+    <param name="markers_pub_topic_name" value="$(arg markers_topic_pub)" />
+    <param name="path_pub_topic_name" value="$(arg path_topic_pub)" />
     <param name="max_cnt_odom" value="400" />
   </node>
   <node pkg="rviz" type="rviz" name="rviz" args="-d $(find odom_visual_tool)/config/odom_visualization.rviz" />

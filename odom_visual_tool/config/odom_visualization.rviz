@@ -59,7 +59,7 @@ Visualization Manager:
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
-      Color: 255; 0; 0
+      Color: 0; 255; 0
       Enabled: true
       Head Diameter: 0.3
       Head Length: 0.2
