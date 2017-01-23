@@ -1,0 +1,18 @@
+<package>
+  <name>odometry_visualization</name>
+  <version>0.6.0</version>
+  <description>
+    General visualization for odometry.
+  </description>
+  <author>Shi Fan</author>
+  <maintainer email="shifan@jsk.imi.i.u-tokyo.ac.jp">Shi Fan</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <run_depend>odom_visual_tool</run_depend>
+
+  <export>
+    <metapackage/>
+  </export>
+ 
+</package>
